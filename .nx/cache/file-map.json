@@ -86,24 +86,12 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": ".eslintignore",
-        "hash": "7663861978715868291"
+        "file": "tsconfig.base.json",
+        "hash": "16936441711144470533"
       },
       {
-        "file": ".vscode/extensions.json",
-        "hash": "235626400633494639"
-      },
-      {
-        "file": "package.json",
-        "hash": "18300991920351724546"
-      },
-      {
-        "file": "nx.json",
-        "hash": "4005980665727234517"
-      },
-      {
-        "file": ".editorconfig",
-        "hash": "5443105041930014821"
+        "file": "jest.config.ts",
+        "hash": "12333515226966617182"
       },
       {
         "file": "package-lock.json",
@@ -114,36 +102,48 @@
         "hash": "18315524891129148814"
       },
       {
-        "file": ".prettierignore",
-        "hash": "7848693104264504795"
-      },
-      {
         "file": ".gitignore",
         "hash": "2178144051909739023"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "7663861978715868291"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "235626400633494639"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": "package.json",
+        "hash": "18300991920351724546"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "7848693104264504795"
       },
       {
         "file": "README.md",
         "hash": "17364407434291230622"
       },
       {
-        "file": "jest.config.ts",
-        "hash": "12333515226966617182"
-      },
-      {
-        "file": "jest.preset.js",
-        "hash": "9430166341120122740"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "16936441711144470533"
+        "file": "migrations.json",
+        "hash": "4310434698071650923"
       },
       {
         "file": ".prettierrc",
         "hash": "16267754514737964994"
       },
       {
-        "file": "migrations.json",
-        "hash": "4310434698071650923"
+        "file": "nx.json",
+        "hash": "4005980665727234517"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
       }
     ],
     "projectFileMap": {
@@ -296,7 +296,7 @@
         },
         {
           "file": "server/project-server/src/app/database/database.provider.ts",
-          "hash": "1730341302620511283",
+          "hash": "14546405309117290134",
           "deps": [
             "npm:sequelize-typescript"
           ]
@@ -332,6 +332,25 @@
             "npm:@nx/webpack",
             "npm:path"
           ]
+        },
+        {
+          "file": "server/project-server/src/app/database/constant.ts",
+          "hash": "11016371504893939362"
+        },
+        {
+          "file": "server/project-server/src/app/database/tables/account/AuthToken.ts",
+          "hash": "4563055080239930013",
+          "deps": [
+            "npm:sequelize-typescript"
+          ]
+        },
+        {
+          "file": "server/project-server/src/app/models/Account.ts",
+          "hash": "1538204082654937611"
+        },
+        {
+          "file": "server/project-server/src/app/models/Global.ts",
+          "hash": "4297543392296999682"
         }
       ]
     }

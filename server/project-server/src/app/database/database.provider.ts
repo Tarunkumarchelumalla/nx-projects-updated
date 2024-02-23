@@ -12,8 +12,9 @@ export const databaseProviders = [
           password: 'password',
           database: 'nest',
         });
-        sequelize.addModels([Cat]);
+        sequelize.addModels([]);
         await sequelize.sync();
         return sequelize;
       },
     }
+]
