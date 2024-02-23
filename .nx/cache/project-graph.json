@@ -1,0 +1,242 @@
+{
+  "nodes": {
+    "project-server": {
+      "name": "project-server",
+      "type": "app",
+      "data": {
+        "root": "server/project-server",
+        "projectType": "application",
+        "targets": {
+          "build": {
+            "cache": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production"
+            ],
+            "outputs": [
+              "{workspaceRoot}/dist\\server\\project-server"
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+              "cwd": "server/project-server",
+              "args": [
+                "--node-env=production"
+              ],
+              "command": "webpack-cli build"
+            },
+            "configurations": {}
+          },
+          "serve": {
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "options": {
+              "buildTarget": "project-server:build"
+            },
+            "configurations": {
+              "development": {
+                "buildTarget": "project-server:build:development"
+              },
+              "production": {
+                "buildTarget": "project-server:build:production"
+              }
+            }
+          },
+          "preview": {
+            "options": {
+              "cwd": "server/project-server",
+              "args": [
+                "--node-env=production"
+              ],
+              "command": "webpack-cli serve"
+            },
+            "executor": "nx:run-commands",
+            "configurations": {}
+          },
+          "serve-static": {
+            "executor": "@nx/web:file-server",
+            "options": {
+              "buildTarget": "build"
+            },
+            "configurations": {}
+          },
+          "lint": {
+            "cache": true,
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore",
+              "{workspaceRoot}/eslint.config.js"
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+              "cwd": "server/project-server",
+              "command": "eslint ."
+            },
+            "configurations": {}
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ],
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "server/project-server/jest.config.ts"
+            },
+            "configurations": {}
+          }
+        },
+        "name": "project-server",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "server/project-server/src",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
+    "nx-projects": {
+      "name": "nx-projects",
+      "type": "app",
+      "data": {
+        "root": "apps/nx-projects",
+        "targets": {
+          "lint": {
+            "executor": "@nx/linter:eslint",
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore",
+              "{workspaceRoot}/eslint.config.js"
+            ],
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "apps/nx-projects/**/*.ts",
+                "apps/nx-projects/**/*.html"
+              ]
+            },
+            "configurations": {}
+          },
+          "build": {
+            "executor": "@angular-devkit/build-angular:browser",
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production"
+            ],
+            "outputs": [
+              "{options.outputPath}"
+            ],
+            "options": {
+              "outputPath": "dist/apps/nx-projects",
+              "index": "apps/nx-projects/src/index.html",
+              "main": "apps/nx-projects/src/main.ts",
+              "polyfills": [
+                "zone.js"
+              ],
+              "tsConfig": "apps/nx-projects/tsconfig.app.json",
+              "assets": [
+                "apps/nx-projects/src/favicon.ico",
+                "apps/nx-projects/src/assets"
+              ],
+              "styles": [
+                "apps/nx-projects/src/styles.scss"
+              ],
+              "scripts": []
+            },
+            "configurations": {
+              "production": {
+                "budgets": [
+                  {
+                    "type": "initial",
+                    "maximumWarning": "500kb",
+                    "maximumError": "1mb"
+                  },
+                  {
+                    "type": "anyComponentStyle",
+                    "maximumWarning": "2kb",
+                    "maximumError": "4kb"
+                  }
+                ],
+                "outputHashing": "all"
+              },
+              "development": {
+                "buildOptimizer": false,
+                "optimization": false,
+                "vendorChunk": true,
+                "extractLicenses": false,
+                "sourceMap": true,
+                "namedChunks": true
+              }
+            },
+            "defaultConfiguration": "production"
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ],
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "apps/nx-projects/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            }
+          },
+          "serve": {
+            "executor": "@angular-devkit/build-angular:dev-server",
+            "configurations": {
+              "production": {
+                "browserTarget": "nx-projects:build:production"
+              },
+              "development": {
+                "browserTarget": "nx-projects:build:development"
+              }
+            },
+            "defaultConfiguration": "development",
+            "options": {}
+          },
+          "extract-i18n": {
+            "executor": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+              "browserTarget": "nx-projects:build"
+            },
+            "configurations": {}
+          }
+        },
+        "name": "nx-projects",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "prefix": "nx-projects",
+        "sourceRoot": "apps/nx-projects/src",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    }
+  },
+  "externalNodes": {},
+  "dependencies": {
+    "project-server": [],
+    "nx-projects": []
+  },
+  "version": "6.0"
+}
