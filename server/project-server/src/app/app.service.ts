@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AuthToken } from './database/tables/account/AuthToken';
+import { UserTable } from './database/tables/users/UserTable';
 
 @Injectable()
 export class AppService {
@@ -17,8 +18,34 @@ export class AppService {
        'createdBy',
        'createdAt',
        'Token',
-       'UID' 
+       'UID'
       ],
     })
   }
+
+  getUserData() {
+    return UserTable.create({
+      Name:'mouseTable',
+      Games:['helo'],
+      Profile:'ghsdvahgdv',
+      ProfileType:'helo',
+      Score:500,
+      createdBy:20215,
+      createdAt: new Date(),
+
+    },{
+      fields: [
+       'Name',
+        'Games',
+        'ProfileType',
+        'Profile',
+        'Score',
+        'createdAt',
+        'createdBy'
+      ],
+    })
+  }
+
+  
+
 }

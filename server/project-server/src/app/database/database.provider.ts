@@ -1,5 +1,9 @@
 import { Sequelize } from 'sequelize-typescript';
 import { AuthToken } from './tables/account/AuthToken';
+import { UserTable } from './tables/users/UserTable';
+
+
+const Models = [AuthToken,UserTable]
 
 export const databaseProviders = [
     {
@@ -13,7 +17,7 @@ export const databaseProviders = [
           password: 'root',
           database: 'test',
         });
-        sequelize.addModels([AuthToken]);
+        sequelize.addModels([...Models]);
         await sequelize.sync();
         return sequelize;
       },
