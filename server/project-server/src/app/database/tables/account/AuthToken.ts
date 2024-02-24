@@ -1,7 +1,7 @@
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 import { TABLE_NAMES, TABLE_INDEX } from "../../constant";
-import { DB_CONFIG } from "../../../environment/environment";
 import { Int_AuthToken } from "../../../models/Account";
+import { DB_CONFIG } from "../../../environment/environment";
 
 @Table({
   tableName: TABLE_NAMES.AUTH_TOKEN,

@@ -1,6 +1,6 @@
 export const TABLE_NAMES={
 
-    AUTH_TOKEN: "user_auth_token",
+    AUTH_TOKEN: "auth_table",
 
 }
 

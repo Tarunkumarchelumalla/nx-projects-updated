@@ -37,5 +37,12 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
+.nx
 .angular
+.nx/cache/run.json
+.nx/cache/project-graph.json
+.nx/cache/parsed-lock-file.json
+.nx/cache/nx_files.nxt
+.nx/cache/lockfile.hash
+.nx/cache/file-map.json
+

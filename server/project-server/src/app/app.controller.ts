@@ -2,11 +2,11 @@ import { Controller, Get } from '@nestjs/common';
 
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('account')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Get('/get')
   getData() {
     return this.appService.getData();
   }
