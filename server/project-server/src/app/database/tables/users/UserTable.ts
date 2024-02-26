@@ -13,11 +13,8 @@ import { Int_UserTable } from "../../../models/UserTable";
   initialAutoIncrement: TABLE_INDEX.USER_TABLE,
 })
 export class UserTable extends Model<Int_UserTable> implements Int_UserTable {
-  UID: string;
-  Name: string;
-  Profile: string;
-  ProfileType: string;
-  Score: number;
+
+
   @Column({
     type: DataType.BIGINT,
     autoIncrement: true,
@@ -29,10 +26,70 @@ export class UserTable extends Model<Int_UserTable> implements Int_UserTable {
   ID: number;
 
   @Column({
-    type:DataType.ARRAY(DataType.STRING),
-    allowNull:true,
+    type: DataType.STRING,
+    allowNull: false,
   })
-  Games: string[];
+  Name: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  Profile: string;
+
+  @Column({
+    type: DataType.ENUM('public', 'private'),
+    allowNull: false,
+  })
+  ProfileType: "public" | "private";
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  Email: string;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  Score: number;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  Phone: number;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  Followers: number;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  Following: number;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  Token: string;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  GridScore: Number;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  Password: string;
 
   @Column({
     type: DataType.BOOLEAN,
@@ -43,7 +100,6 @@ export class UserTable extends Model<Int_UserTable> implements Int_UserTable {
     },
   })
   IsActive: boolean;
-
 
   @Column({
     type: DataType.INTEGER,
