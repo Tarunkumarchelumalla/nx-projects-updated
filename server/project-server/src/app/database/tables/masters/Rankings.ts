@@ -57,5 +57,3 @@ export class RankingsTable extends Model<Int_Rankings> implements Int_Rankings {
     })
     updatedAt: Date;
 }
-
-export default RankingsTable;

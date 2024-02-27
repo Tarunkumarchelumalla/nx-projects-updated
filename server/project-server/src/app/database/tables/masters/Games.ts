@@ -1,8 +1,7 @@
-import { Column, DataType, Table } from "sequelize-typescript";
+import { Column, DataType, Table,Model } from "sequelize-typescript";
 import { TABLE_INDEX, TABLE_NAMES } from "../../constant";
 import { DB_CONFIG } from "../../../environment/environment";
 import { Int_Games } from "../../../models/masters/Games";
-import { Model } from "sequelize";
 
 @Table({
     tableName: TABLE_NAMES.MASTER_GAMES_TABLE,
@@ -22,12 +21,19 @@ import { Model } from "sequelize";
         },
       })
       GID: number;
-  
+
       @Column({
-          type: DataType.STRING,
-          allowNull: false,
+        type: DataType.STRING,
+        allowNull: false,
+        })
+        GameName: string;
+
+      @Column({
+        type: DataType.STRING,
+        allowNull: false,
       })
       PosterUrl: string;
+
   
       @Column({
           type: DataType.STRING,
@@ -68,6 +74,3 @@ import { Model } from "sequelize";
       })
       updatedAt: Date;
   }
-  
-  export default GameTable;
-  

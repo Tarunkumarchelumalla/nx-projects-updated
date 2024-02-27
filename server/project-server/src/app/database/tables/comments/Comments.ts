@@ -1,8 +1,8 @@
-import { Model } from "sequelize";
-import { Table, Column, DataType } from "sequelize-typescript";
+import { Table, Column, DataType,Model } from "sequelize-typescript";
 import { DB_CONFIG } from "../../../environment/environment";
 import { Int_Posts } from "../../../models/Posts";
 import { TABLE_NAMES, TABLE_INDEX } from "../../constant";
+import { Int_Comments } from "../../../models/Comments";
 
 @Table({
     tableName: TABLE_NAMES.COMMENTS_TABLE,
@@ -12,88 +12,86 @@ import { TABLE_NAMES, TABLE_INDEX } from "../../constant";
     paranoid: false,
     initialAutoIncrement: TABLE_INDEX.AUTH_TOKEN,
   })
-export class PostsTable extends Model<Int_Posts> implements Int_Posts {
+export class CommentsTable extends Model<Int_Comments> implements Int_Comments {
+    @Column({
+        type: DataType.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+        get() {
+            return parseInt(this.getDataValue("CID"));
+        },
+    })
+    CID!: number;
+
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
+    CRID!: number;
+
+    @Column({
+        type: DataType.ENUM('TEXT', 'MEDIA'),
+        allowNull: false,
+    })
+    CommentType!: "TEXT" | "MEDIA";
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    Comment!: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    CommentUrl!: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    CommentUrlType!: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    CommentSize!: string;
+
     @Column({
         type: DataType.STRING,
         primaryKey: true,
         allowNull: false,
     })
-    PID: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    UID: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    Caption: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    Description: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    MediaUrl: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    MediaType: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    MediaSize: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    CRID: string;
-
-    @Column({
-        type: DataType.INTEGER,
-        allowNull: false,
-    })
-    Likes: number;
-
-    @Column({
-        type: DataType.INTEGER,
-        allowNull: false,
-    })
-    dislikes: number;
-
-    @Column({
-        type: DataType.INTEGER,
-        allowNull: false,
-    })
-    GID: number;
-
+    PID!: string;
     // Common fields
     @Column({
-        type: DataType.DATE,
+        type: DataType.BOOLEAN,
+        allowNull: true,
+        defaultValue: true,
+        get() {
+          return !!this.getDataValue("IsActive");
+        },
+      })
+      IsActive: boolean;
+    
+      @Column({
+        type: DataType.INTEGER,
         allowNull: false,
-        defaultValue: DataType.NOW,
-    })
-    createdAt: Date;
-
-    @Column({
-        type: DataType.DATE,
-        allowNull: false,
-        defaultValue: DataType.NOW,
-    })
-    updatedAt: Date;
+      })
+      createdBy: number;
+    
+      @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+      })
+      updatedBy: number;
+    
+      @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+      })
+      deletedBy: number;
 }
 
-export default PostsTable;

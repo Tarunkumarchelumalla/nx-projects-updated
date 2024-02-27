@@ -10,7 +10,16 @@ export interface Int_UserTable extends Int_Common{
     Followers:number;
     Following:number;
     Token:string;
-    GridScore:Number;
+    GridScore:number;
     Password:string;
+    UID:number
     // games Id
+}
+
+export interface Int_UserLinkGameTable extends Int_Common{
+
+    ID:number;
+    GID:number;
+    UID:number;
+
 }

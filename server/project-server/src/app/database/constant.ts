@@ -6,6 +6,7 @@ export const TABLE_NAMES={
     MASTER_RANKINGS_TABLE:"master_rankings_table",
     POSTS_TABLE:"posts_table",
     COMMENTS_TABLE:"comments_table",
+    USER_LINK_GAME_TABLE:"user_link_game_table",
 }
 
 export const TABLE_INDEX = {

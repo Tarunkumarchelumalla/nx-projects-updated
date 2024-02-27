@@ -1,51 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { AuthToken } from './database/tables/account/AuthToken';
-import { UserTable } from './database/tables/users/UserTable';
+import {  Injectable } from '@nestjs/common';
+import { FirebaseRepository } from './database/firebase.reposetory';
+
+
 
 @Injectable()
 export class AppService {
-
-  getData() {
-    return AuthToken.create({
-      ID:2123,
-      createdBy:454645,
-      createdAt:new Date(),
-      Token:'sbdahdgvasghvdjahdsva',
-      UID:78
-    },{
-      fields: [
-       'ID',
-       'createdBy',
-       'createdAt',
-       'Token',
-       'UID'
-      ],
-    })
-  }
-
-  getUserData() {
-    return UserTable.create({
-      Name:'mouseTable',
-      Games:['helo'],
-      Profile:'ghsdvahgdv',
-      ProfileType:'helo',
-      Score:500,
-      createdBy:20215,
-      createdAt: new Date(),
-
-    },{
-      fields: [
-       'Name',
-        'Games',
-        'ProfileType',
-        'Profile',
-        'Score',
-        'createdAt',
-        'createdBy'
-      ],
-    })
-  }
-
+    constructor(private firebaseRepository: FirebaseRepository) {}
   
+
+    async GetTestData(){
+
+        const result =await this.firebaseRepository.collection.doc('W1z1RiDwHbj8ZMKBHHDY')
+       const priority =  await result.collection('Task-Priority').get()
+       const priorityList = priority.docs.map((v) => v.data());
+        return{
+            priorityList
+        }
+    }
 
 }

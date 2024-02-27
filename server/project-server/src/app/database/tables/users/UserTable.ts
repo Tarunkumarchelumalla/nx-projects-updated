@@ -2,7 +2,7 @@ import { Column, DataType, Model, Table } from "sequelize-typescript";
 import { TABLE_NAMES, TABLE_INDEX } from "../../constant";
 
 import { DB_CONFIG } from "../../../environment/environment";
-import { Int_UserTable } from "../../../models/UserTable";
+import { Int_UserTable } from "../../../models/Users";
 
 @Table({
   tableName: TABLE_NAMES.USER_TABLE,
@@ -20,10 +20,10 @@ export class UserTable extends Model<Int_UserTable> implements Int_UserTable {
     autoIncrement: true,
     primaryKey: true,
     get() {
-      return parseInt(this.getDataValue("ID"));
+      return parseInt(this.getDataValue("UID"));
     },
   })
-  ID: number;
+  UID: number;
 
   @Column({
     type: DataType.STRING,
@@ -45,31 +45,31 @@ export class UserTable extends Model<Int_UserTable> implements Int_UserTable {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   Email: string;
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: false,
+    allowNull: true,
   })
   Score: number;
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: false,
+    allowNull: true,
   })
   Phone: number;
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: false,
+    allowNull: true,
   })
   Followers: number;
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: false,
+    allowNull: true,
   })
   Following: number;
 
@@ -83,7 +83,7 @@ export class UserTable extends Model<Int_UserTable> implements Int_UserTable {
     type: DataType.INTEGER,
     allowNull: false,
   })
-  GridScore: Number;
+  GridScore: number;
 
   @Column({
     type: DataType.STRING,

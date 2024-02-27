@@ -1,5 +1,5 @@
-import { Model } from "sequelize";
-import { Table, Column, DataType } from "sequelize-typescript";
+
+import { Table, Column, DataType,Model } from "sequelize-typescript";
 import { Int_Posts } from "../../../models/Posts";
 import { DB_CONFIG } from "../../../environment/environment";
 import { TABLE_NAMES, TABLE_INDEX } from "../../constant";
@@ -85,18 +85,30 @@ export class PostsTable extends Model<Int_Posts> implements Int_Posts {
 
     // Common fields
     @Column({
-        type: DataType.DATE,
+        type: DataType.BOOLEAN,
+        allowNull: true,
+        defaultValue: true,
+        get() {
+          return !!this.getDataValue("IsActive");
+        },
+      })
+      IsActive: boolean;
+    
+      @Column({
+        type: DataType.INTEGER,
         allowNull: false,
-        defaultValue: DataType.NOW,
-    })
-    createdAt: Date;
-
-    @Column({
-        type: DataType.DATE,
-        allowNull: false,
-        defaultValue: DataType.NOW,
-    })
-    updatedAt: Date;
+      })
+      createdBy: number;
+    
+      @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+      })
+      updatedBy: number;
+    
+      @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+      })
+      deletedBy: number;
 }
-
-export default PostsTable;
